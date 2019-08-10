@@ -1,2 +1,0 @@
-# geanml
-domínio gean.ml
