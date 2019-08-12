@@ -1,0 +1,26 @@
+# Site settings
+title: "Redirect com erro-404 "
+description: > 
+  Write a description of your website here.
+
+author: Gean Ramos
+email: geancr10@gmail.com
+twitter_username: geanramos
+github_username: geanramos
+
+baseurl: "/" # the subpath of your site, e.g. /blog
+url: "https://gean.ml" # the base hostname & protocol for your site
+
+google_analytics_id: UA-59300081-1
+disqus_id:
+
+# Build settings
+include: [_pages]
+markdown: kramdown
+permalink: /:title.html
+
+sass:
+    style: compressed
+
+exclude: [vendor]
+
