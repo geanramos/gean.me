@@ -1,0 +1,449 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml" lang="pt-BR">
+<head profile="https://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title><%VAR POST_TITLE%> | <%VAR BLOG_TITLE%></title>
+<link rel="shortcut icon" href="/favicon.ico?v=2016" type="image/x-icon" />
+<link rel="stylesheet" href="https://geanramos.zip.net.50x.com.br/style.css" type="text/css" media="screen" />
+
+<link rel=stylesheet type="text/css" href="https://geanramos.zip.net.50x.com.br/inc/css/animation.css">
+<link rel=stylesheet type="text/css" href="https://geanramos.zip.net.50x.com.br/inc/css/fontello.css">
+<link rel=stylesheet type="text/css" href="https://geanramos.zip.net.50x.com.br/inc/css/fontello-codes.css">
+<link rel=stylesheet type="text/css" href="https://geanramos.zip.net.50x.com.br/inc/css/fontello-embedded.css">
+<link rel="alternate" type="application/rss+xml" title="Feed de <%VAR BLOG_TITLE%> &raquo;" href="<%VAR URL_FEED%>" />
+<link rel="publisher" href="https://plus.google.com/+GeanRamos"/>
+<meta property="fb:admins" content="100000009730750"/>
+<meta property="fb:app_id" content="122527777827024"/>
+<style type="text/css" media="screen">
+#page { background: url("https://geanramos.zip.net.50x.com.br/images/kubrickbg-ltr.jpg") repeat-y top; border: none; }
+div#logo_uolblog{position:absolute;left:849px;top:188px;z-index:1}
+<!--#headerimg h6 a, #headerimg h6 a:visited, #headerimg .description { color: #FFFFFF; } -->
+</style>
+<style type='text/css'></style><script>
+
+var zeroComm = "<%VAR BLOG_TEXT_NO_COMMENT%>";
+var humComm = "<%VAR BLOG_TEXT_ONE_COMMENT%>";
+var enesComm = "<%VAR BLOG_TEXT_MORE_COMMENTS%>";
+var url;
+function abre(url,w,h,scr) {
+	window.open(url,'comentarios','width='+w+',height='+h+',directories=0,location=0,menubar=0,resizable=1,scrollbars='+scr+',status=0,toolbar=0,marginleft=0,margintop=0,left=25,top=25');
+}
+
+function commentText(qtd) {
+	if(qtd == "0") {txtFinal = "("+qtd+") "+ zeroComm;}
+  else if (qtd == "1") {txtFinal = "("+qtd+") "+ humComm;}  
+  else {txtFinal = "("+qtd+") "+ enesComm;}
+  return txtFinal;
+}
+
+/* Declaração das variáveis */
+var periodoMesAtual = "";
+var periodoAnoAtual = "";
+var k = 0;
+var j = 0;
+var periodo = new Array();
+var periodoURL = new Array();
+
+<%WHILE ARCHIVE_LINK%>
+	periodo[k++] = "<%VAR ARCHIVE_DATE_BEGIN%> a <%VAR ARCHIVE_DATE_END%>";
+	periodoURL[j++] = "<%VAR ARCHIVE_LINK%>";
+<%ENDWHILE%>
+	
+/* Acerta a altura das colunas dos meses para que não haja quebra de layout. */
+function defineAlturaColunas() {
+	var arquivo = document.getElementById("calendario").getElementsByTagName("ul");
+  var	maiorAltura = 0;
+	for (i = 0; i < arquivo.length; i++) {
+		((arquivo[i].offsetHeight > maiorAltura) ? maiorAltura = arquivo[i].offsetHeight : arquivo[i].style.height = maiorAltura);
+	}
+}
+
+/* Define o nome do mês baseado pelo index */
+function defineMes(numMes) {
+	var nomeMes = new Array();
+	nomeMes = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+	return nomeMes[eval(numMes - 1)];
+}
+
+/* Monta o calendário */
+ function montaCalendario(){
+	for(i in periodo) {
+		var periodoMes = periodo[i].substr(3,2); //Mes do periodo
+		var periodoAno = periodo[i].substr(6,4); //Ano do periodo
+	
+		/* Separa os anos */
+		if (periodoAnoAtual == "") {
+			document.write ("<ol class=\"ano\"><li><strong>" + periodoAno + "</strong></li>");
+			periodoAnoAtual = periodoAno;
+			periodoMesAtual = "";
+		}
+		else if (periodoAno != periodoAnoAtual) {
+			document.write ("</ol></ol><ol class=\"ano\"><li><strong>" + periodoAno + "</strong></li>");
+			periodoAnoAtual = periodoAno;
+			periodoMesAtual = "";
+		}
+	
+		/* Separa os meses */	
+		if (periodoMesAtual == "") {
+			document.write ("<ul class=\"mes\"><li><span>" + defineMes(periodoMes) + "</span></li>");		
+			periodoMesAtual = periodoMes;
+		}
+		else if (periodoMes != periodoMesAtual) {
+			document.write ("</ul><ul class=\"mes\"><li><span>" + defineMes(periodoMes) + "</span></li>");		
+			periodoMesAtual = periodoMes;
+		}	
+		/* Períodos */
+		document.write ("<li><a href=\"" + periodoURL[i] + "\">"+ periodo[i].replace(/\/20[0-9][0-9]/g, "") +"</a></li>");
+	}
+
+	/*Fecha Calendário*/
+	document.write ("</ol>");
+}
+
+/* Monta os períodos do arquivo no box lateral */
+function montaPeriodos() {
+		numMaximo = periodo.length;
+		for(i = 0; i < numMaximo; i ++) {
+			document.write ("<li class=\"link\"><a href=\"" + periodoURL[i] + "\">"+ periodo[i] +"</a></li>");
+		}
+}
+
+/* Faz o request do XML */
+var http_request = false;
+function makeRequest(url) {
+    http_request = false;
+    if (window.XMLHttpRequest) {
+        http_request = new XMLHttpRequest();
+        if (http_request.overrideMimeType) {
+            http_request.overrideMimeType('text/xml');
+        }
+    } else if (window.ActiveXObject) {
+        try {
+            http_request = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (e) {
+            try {
+            http_request = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) {}
+        }
+    }
+    if (!http_request) {
+        alert('Giving up :( Cannot create an XMLHTTP instance');
+        return false;
+    }
+    http_request.onreadystatechange = alertContents;
+    http_request.open('GET', url, true);
+    http_request.send(null);
+}
+function alertContents() {
+    if (http_request.readyState == 4) {
+        if (http_request.status == 200) {
+            mostraHistorico();
+        }
+        else {
+            //alert('Houve um problema com a requisição.');
+        }
+    }
+}						
+//Fim Request 
+
+/* Monta a lista dos últimos posts */						
+ function mostraHistorico() {                   
+ var xmlDoc = http_request.responseXML;
+ var item = xmlDoc.getElementsByTagName("item");
+ for(i = 0; i < item.length; i ++) {
+  var link = item[i].getElementsByTagName("link")[0].firstChild.nodeValue;
+  var titulo = item[i].getElementsByTagName("title")[0].firstChild.nodeValue.replace(/\s\-\sAutor\(.*\)$/,""); 
+  if (titulo == "") titulo = "Sem título"; 
+  var data = item[i].getElementsByTagName("pubDate")[0].firstChild.nodeValue; 
+  var er = /([a-z]{3}), ([0-9]{2}) ([a-z]{3}) ([0-9]{4}) ([0-9]{2}\:[0-9]{2}\:[0-9]{2}) -[0-9]{4}/i;
+  data = data.match(er);
+  var mes;
+  switch(data[3])
+  {
+   case 'Jan' : mes = '01' ; break;
+   case 'Feb' : mes = '02' ; break;
+   case 'Mar' : mes = '03' ; break;
+   case 'Apr' : mes = '04' ; break;
+   case 'May' : mes = '05' ; break;
+   case 'Jun' : mes = '06' ; break;
+   case 'Jul' : mes = '07' ; break;
+   case 'Aug' : mes = '08' ; break;
+   case 'Sep' : mes = '09' ; break;
+   case 'Oct' : mes = '10' ; break;
+   case 'Nov' : mes = '11' ; break;
+   case 'Dec' : mes = '12' ; break;
+  }
+  <%IF BLOG_ARCHIVE_PAGE%>document.getElementById("historico").innerHTML += "<li>" + data[2] +'/'+ mes + "/" + data[4] + " - " + data[5].substr(0,5) + " - &nbsp;<a href=\"" + link + "\">" + titulo + "</a></li>";<%ENDIF%>
+	<%IFNOT BLOG_HISTORY_LINK='FALSE'%>document.getElementById("historico-lateral").innerHTML += "<li class=\"link\"> " + data[2] +'/'+ mes + " - <a id=b href=\"" + link + "\">" + titulo + "</a></li>";<%ENDIF%>
+ }
+}
+</script>
+
+</head>
+<body class="home blog">
+
+
+
+<div id="page">
+<div id="header" role="banner">
+	<div id="headerimg">
+		<h6><a href="https://geanramos.zip.net.50x.com.br/index.html"><%VAR BLOG_TITLE%></a></h6>
+		<div class="description">Blog do Gean Ramos</div>
+	</div>
+	<div id="logo_uolblog"><a href="https://mulher.uol.com.br/comportamento/?utm_source=geanramos.zip.net&utm_medium=blog-parceiro" target="_blank"><img src="https://geanramos.zip.net.50x.com.br/x.gif" alt="" width="180" height="19" border="0" /></a></div>
+	
+</div>
+<hr />
+	<div id="content" class="narrowcolumn" role="main">
+<%IF BLOG_ARCHIVE_PAGE%>
+
+					<%IFNOT BLOG_HISTORY_LINK='FALSE'%>
+					<!-- Histórico -->
+					<div id="ultimas">
+						<h4>Últimas mensagens publicadas:</h4>		
+						<ul id="historico"></ul>
+					</div>
+					<!-- /Histórico -->
+					<%ENDIF%>
+					<!-- Busca -->
+					<div id="buscaHistorico">
+						<h4>Escolha o período para ler as mensagens arquivadas ou use a busca:</h4>
+					
+    							<form action="https://www.google.com.br" id="cse-search-box">
+    							  <div>
+    							    <input type="hidden" name="cx" value="partner-pub-1416126749136213:1015486489" />
+    							    <input type="hidden" name="ie" value="UTF-8" />
+    							    <input type="text" name="q" size="55" />
+    							    <input type="submit" name="sa" value="Buscar" />
+    							  </div>
+    							</form>
+    							<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    							<script type="text/javascript">google.load("elements", "1", {packages: "transliteration"});</script>
+    							<script type="text/javascript" src="https://www.google.com/cse/t13n?form=cse-search-box&t13n_langs=en"></script>
+					
+					</div>
+					<!-- /Busca -->
+					
+					<!-- Calendário -->
+					<div id="calendario">
+						<script type="text/javascript">
+							montaCalendario();//calendario.js
+						</script>
+					</div>
+					<!-- Calendário -->
+
+
+<%ELSE%>
+						
+                    
+					
+						<!-- Mensagens do Blog -->
+						<table cellpadding=0 cellspacing=0 border=0 width=100%><tr><td>
+		<%IFNOT CATEGORY_CURRENT='NULL'%>
+			<%IF CATEGORYID_CURRENT='1'%>
+				<div id="catTitleLink" class="catTitle">
+			<%ELSEIF CATEGORYID_CURRENT='2'%>
+				<div id="catTitleEvento" class="catTitle">
+			<%ELSEIF CATEGORYID_CURRENT='3'%>
+				<div id="catTitleCitacao" class="catTitle">
+			<%ELSEIF CATEGORYID_CURRENT='4'%>
+				<div id="catTitleAvaliacao" class="catTitle">
+			<%ELSEIF CATEGORYID_CURRENT='5'%>
+				<div id="catTitleObjDesejo" class="catTitle">
+			<%ELSE%>
+				<div id="catTitleOPerson" class="catTitle">
+			<%ENDIF%>
+				<h3 id="catTitleH3"><%VAR CATEGORY_CURRENT%></h3>
+			</div>
+		<%ENDIF%></td></tr>
+		<!-- / Categoria Titulo -->
+							
+                            
+                            <%WHILE POST_TITLE%>
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									<%IFNOT POST_TITLE=''%>
+									<%IF POST_CATEGORY_NAME='NULL'%>
+										<h1><a name=<%VAR POST_ID%>></a><a href="<%VAR POST_LINK%>" rel="bookmark" title="Link permanente para <%VAR POST_TITLE%>"><%VAR POST_TITLE%></a></h1>
+										<div align=left id=icon><small><%VAR POST_DATE_HEADER%> &raquo; <a href="#fb-comments-<%VAR POST_ID%>"  rel="category"><span class="fb-comments-count" data-href="<%VAR POST_LINK%>"></span> Comentários</a></small> | <a href="https://www.facebook.com/sharer.php?u=<%VAR POST_LINK%>" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=<%VAR POST_TITLE%>&tw_p=tweetbutton&url=<%VAR POST_LINK%>&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=<%VAR POST_LINK%>" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=<%VAR POST_LINK%>" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									<%ENDIF%>
+									<%ENDIF%>
+									<%VAR POST_TEXT%><br clear=all><span id=f><br>
+										<%IF CATEGORY_CURRENT='NULL'%>
+										<%IFNOT POST_CATEGORY_NAME='NULL'%>
+										Categoria: <a href="/<%VAR POST_CATEGORY_LINK%>/" id=b><%VAR POST_CATEGORY_NAME%></a>
+										<%ENDIF%>
+										<%ENDIF%>
+										<%IF POST_FROM_MOB%><%ELSE%><%IF POST_FROM_MAI%><%ELSE%><%ENDIF%><%ENDIF%> <!--Publicado por Gean Ramos em <%VAR POST_DATE_HEADER%><br>-->
+									<%IF BLOG_ACCEPT_COMMENT%> <!--Deixe seu <a id=b href="javascript:abre('https://navblog.uol.com.br/comment.html?postFileName=<%VAR POST_ID%>&idBlog=<%VAR BLOG_ID%>','356','478','1');"><span id="post<%VAR POST_ID%>"></span>Comentário</a> |-->
+					      	<%ELSE%>
+					       		<%IF POST_HAS_COMMENT%><%ENDIF%>
+					      	<%ENDIF%>							
+									<!--<a href="<%VAR POST_LINK%>"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="https://www.facebook.com/sharer.php?u=<%VAR POST_LINK%>" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=<%VAR POST_TITLE%>&tw_p=tweetbutton&url=<%VAR POST_LINK%>&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=<%VAR POST_LINK%>" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=<%VAR POST_LINK%>" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-<%VAR POST_ID%>></a>
+									<div class="fb-comments" data-href="<%VAR POST_LINK%>" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							<%ENDWHILE%>							
+
+							<tr><th height=25><a href="listArchive.html" class="b">&laquo; Posts Mais Antigos</a> | <a href="index.html" class="b">Posts Mais Novos &raquo;</a></th></tr>
+						</table>
+<%ENDIF%>	
+	</div>
+	<div id="sidebar" role="complementary">
+		<ul>
+			<li id="text-2" class="widget widget_text">
+			<div class="textwidget">
+			<a href="href="/listArchive.html" id=b>/lp/kit-mkt-digital-iniciantes.html?utm_source=geanramos.zip.net&utm_medium=Banner-sidebar"><img class="aligncenter" alt="titulo2" src="https://geanramos.zip.net.50x.com.br/images/como-trabalhar-em-casa1.png" /></a></div>
+		</li><li id="search-2" class="widget widget_search">
+		<form action="https://www.google.com.br" id="cse-search-box">
+      <div>
+        <input type="hidden" name="cx" value="partner-pub-1416126749136213:1015486489" />
+        <input type="hidden" name="ie" value="UTF-8" />
+        <input type="text" name="q" size="22" />
+        <input type="submit" name="sa" value="Buscar" />
+      </div>
+    </form></li>
+		<li id="pages-3" class="widget widget_pages"><h1 class="widgettitle">Páginas</h1>
+			<ul>
+			<li class="page_item page-item-2"><a href="https://geanramos.zip.net.50x.com.br/index.html">Página Inicial</a></li>
+			<li class="page_item page-item-2"><a href="/listArchive.html">Arquivo</a></li>
+			<li class="page_item page-item-2"><a href="href="/listArchive.html" id=b>/lp/kit-mkt-digital-iniciantes.html?utm_source=geanramos.zip.net&utm_medium=link-sidebar">MKT para Iniciantes</a></li>
+			</ul>
+		</li>
+		<li id="categories-3" class="widget widget_categories"><h1 class="widgettitle">Categorias</h1>
+		<ul>
+	<!--<li class="cat-item cat-item-1"><a href="?cat=1" title="Ver todos os posts arquivados em Sem categoria">Sem categoria</a></li>-->
+	<li><a href="/listArchive.html" id=b>Todas as mensagens</a></li>
+			<%WHILE CATEGORY_NAME%>
+			<li class="cat-item cat-item-1"><a href="/<%VAR CATEGORY_LINK%>/" id=b><%VAR CATEGORY_NAME%></a></li>
+			<%ENDWHILE%>
+
+		</ul>
+</li><li id="archives-3" class="widget widget_archive"><h1 class="widgettitle">Arquivos</h1>
+		<ul>
+	<!--<li><a href='arch2014-06-01_2014-06-30.html'>junho 2014</a></li>-->
+							<%IFNOT BLOG_HISTORY_LINK='FALSE'%>
+							<%ENDIF%>
+							<%IFNOT BLOG_ARCHIVE_LINK%>
+							<script type="text/javascript">montaPeriodos();</script>
+							<%ENDIF%>
+							<%IFNOT BLOG_ARCHIVE_PAGE%><li><a id=b href="/listArchive.html">+ veja mais</a></li><%ENDIF%>
+		</ul>
+<li id="meta-2" class="widget widget_meta"><h1 class="widgettitle">Outros Sites</h1>
+			<ul>
+			<li><a href="https://blog.uol.com.br/?utm_source=geanramos.zip.net&utm_medium=link-sidebar" title="Hospedado por Uol Blog." title="UOL Blogosfera" target="_blank">Uol Blog</a></li>
+			<li><a href="<%VAR URL_FEED%>" title="Assinar este site usando RSS 2.0"><abbr title="Really Simple Syndication">XML/RSS Feed</abbr></a></li>
+			<%WHILE LINK_TITLE%>
+			<li><a href="<%VAR LINK_URL%>" target="_blank"><%VAR LINK_TITLE%></a></li>
+			<%ENDWHILE%>
+			</ul>
+</li>
+
+		<li id="pages-3" class="widget widget_pages"><h1 class="widgettitle">Leitinho das Crianças</h1>
+			<ul>
+<script async src=""></script>
+<!-- ADS 180x180 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:180px;height:150px"
+     data-ad-client="ca-pub-1416126749136213"
+     data-ad-slot="1358265284"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+			</ul>
+		</li>
+		<li id="pages-3" class="widget widget_pages"><h1 class="widgettitle">Visitas</h1>
+			<ul>
+			<img src="https://www.criarsites.com//wp-content/uploads/2013/04/Super-Contadores-de-Visitas-Online-Gratis-para-seu-Site.gif">
+			</ul>
+		</li>
+		</ul>
+	</div>
+<hr />
+<div id="footer" role="contentinfo">
+	<p>
+		<%VAR BLOG_TITLE%> é orgulhosamente mantido no <a href="https://blog.uol.com.br/?utm_source=geanramos.zip.net&utm_medium=link-footer" title="Uol Blogosfera" >Uol Blog</a>
+		<br /><a href="<%VAR URL_FEED%>">Posts (RSS)</a> e <a href="https://www.facebook.com/groups/geanramos" title="Faça parte de nossa família">Grupo no Facebook</a>.
+	</p>
+</div>
+</div>
+<!-- Gean Ramos - https://facebook.com/geanramoss -->
+<iframe id="rodape" width="100%" height="118" frameborder="0" scrolling="no" src="https://mulher.uol.com.br/blogs-rodape-blogosfera.htm?utm_source=geanramos.zip.net&utm_medium=iframe-footer"></iframe>
+		</body>
+</html>
+<%DEFINE POST_TEXT STRING NULL%>
+<%DEFINE POST_TITLE STRING NULL%>
+<%DEFINE POST_DATE STRING NULL%>
+<%DEFINE POST_USER STRING NULL%>
+<%DEFINE POST_DATE_HEADER STRING NULL%>
+<%DEFINE BLOG_POST_QTTY INTEGER 0%>
+<%DEFINE CATEGORY_NAME STRING NULL%>
+<%DEFINE CATEGORYID_CURRENT INTEGER 0%>
+<%DEFINE CATEGORY_LINK STRING NULL%>
+<%DEFINE POST_CATEGORY_NAME STRING NULL%>
+<%DEFINE POST_CATEGORY_LINK STRING NULL%>
+<%DEFINE CATEGORY_CURRENT STRING NULL%>
+<%DEFINE URL_FEED STRING NULL%>
+<%DEFINE POST_FROM_MOB BOOLEAN FALSE%>
+<%DEFINE POST_FROM_MAI BOOLEAN FALSE%>
+<%DEFINE BLOG_LINK_QTTY INTEGER 0%>
+<%DEFINE LINK_URL STRING NULL%>
+<%DEFINE LINK_TITLE STRING NULL%>
+<%DEFINE BLOG_NEIGHBOOR_QTTY INTEGER 0%>
+<%DEFINE NEIGHBOOR_URL STRING NULL%>
+<%DEFINE NEIGHBOOR_TITLE STRING NULL%>
+<%DEFINE BLOG_OWNER_NAME STRING NULL%>
+<%DEFINE BLOG_CURRENT_DATE STRING NULL%>
+<%DEFINE ARCHIVE_DATE_BEGIN STRING NULL%>
+<%DEFINE ARCHIVE_DATE_END STRING NULL%>
+<%DEFINE ARCHIVE_LINK STRING NULL%>
+<%DEFINE BLOG_ARCHIVE_QTTY INTEGER 0%>
+<%DEFINE BLOG_ARCHIVE_LINK BOOLEAN FALSE%>
+<%DEFINE BLOG_ARCHIVE_PAGE BOOLEAN FALSE%>
+<%DEFINE BLOG_ARCHIVE_LINK_URL STRING NULL%>
+<%DEFINE BLOG_ID STRING NULL%>
+<%DEFINE BLOG_SCRIPT_URI STRING NULL%>
+<%DEFINE POST_ID STRING NULL%>
+<%DEFINE BLOG_EMOTICON_HEAD STRING NULL%>
+<%DEFINE BLOG_EMOTICON_BODY STRING NULL%>
+<%DEFINE BLOG_EMOTICON_FOOT STRING NULL%>
+<%DEFINE BLOG_VOTE BOOLEAN FALSE%>
+<%DEFINE BLOG_RECOMMEND_BLOG BOOLEAN FALSE%>
+<%DEFINE BLOG_RECOMMEND_POST BOOLEAN FALSE%>
+<%DEFINE BLOG_ACCEPT_COMMENT BOOLEAN FALSE%>
+<%DEFINE POST_HAS_COMMENT BOOLEAN FALSE%>
+<%DEFINE BLOG_TITLE STRING NULL%>
+<%DEFINE BLOG_TEXT_NO_COMMENT STRING Sem comentários%>
+<%DEFINE BLOG_TEXT_ONE_COMMENT STRING Um comentário%>
+<%DEFINE BLOG_TEXT_MORE_COMMENTS STRING Comentários%>
+<%DEFINE BLOG_COUNTRY STRING NULL%>
+<%DEFINE BLOG_STATE STRING NULL%>
+<%DEFINE BLOG_CITY STRING NULL%>
+<%DEFINE BLOG_DISTRICT STRING NULL%>
+<%DEFINE BLOG_REGION STRING NULL%>
+<%DEFINE BLOG_GENDER STRING NULL%>
+<%DEFINE BLOG_AGE STRING NULL%>
+<%DEFINE BLOG_LANGUAGE1 STRING NULL%>
+<%DEFINE BLOG_LANGUAGE2 STRING NULL%>
+<%DEFINE BLOG_INTEREST1 STRING NULL%>
+<%DEFINE BLOG_INTEREST2 STRING NULL%>
+<%DEFINE BLOG_INTEREST STRING NULL%>
+<%DEFINE BLOG_IM_TYPE STRING NULL%>
+<%DEFINE BLOG_IM_ID STRING NULL%>
+<%DEFINE BLOG_OWNER_MOOD BOOLEAN FALSE%>
+<%DEFINE POST_LINK STRING NULL%>
+<%DEFINE BLOG_HISTORY_LINK BOOLEAN TRUE%>
