@@ -1,0 +1,24 @@
+/*************************** Toggle Box ***************************/
+
+h3.toggle {
+background-repeat: no-repeat;
+background-position: -15px -15px; 
+font-size: 14px;
+padding: 0 0 10px 25px;
+cursor: pointer;
+}
+h3.toggle a {
+text-decoration: none;
+display: block;
+}
+h3.toggle-active {
+background-position: -64px -245px; 
+}
+.toggle-box {
+clear:both;
+margin: 0 0 50px 0;
+overflow: hidden;
+}
+h3.toggle {
+background-image: url(images/sprite.png);
+}

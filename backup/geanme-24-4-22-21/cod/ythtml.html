@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exemplo de Solicitação HTTP em JavaScript</title>
+</head>
+<body>
+    <button onclick="fetchContent()">Obter Conteúdo</button>
+    <pre id="content"></pre>
+
+    <script>
+        function fetchContent() {
+            var url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC43nsQHUiTT2na67yM796HQ";
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var content = xhr.responseText;
+                    content = content.replace(/youtube\.com/g, "gearamos.com");
+                    document.getElementById("content").textContent = content;
+                } else if (xhr.readyState === 4) {
+                    document.getElementById("content").textContent = "Falha ao obter o conteúdo da URL.";
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+</html>

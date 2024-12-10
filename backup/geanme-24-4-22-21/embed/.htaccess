@@ -1,0 +1,6 @@
+﻿# BEGIN YOURLS
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^([A-Za-z0-9_-]+)$ ?v=$1 [L]
+</IfModule>
+# END YOURLS

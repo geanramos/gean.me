@@ -1,0 +1,577 @@
+<?php
+        $videoId = $_GET["v"];
+        // URL do vídeo com o parâmetro ?v=
+        $videoUrl = "https://pt.pornhub.com/view_video.php?viewkey=$videoId";
+
+        // Obtém o conteúdo HTML da página do vídeo
+        $html = file_get_contents($videoUrl);
+
+        // Verifica se o conteúdo foi obtido com sucesso
+        if ($html === false) {
+            die('Erro ao obter conteúdo da página do vídeo.');
+        }
+
+        // Expressão regular para encontrar o trecho de script JSON-LD
+        $pattern = '/<script type="application\/ld\+json">(.*?)<\/script>/s';
+
+        // Executa a expressão regular no HTML para encontrar o script JSON-LD
+        if (preg_match($pattern, $html, $matches)) {
+            // Decodifica o JSON retornado em um array associativo
+            $videoData = json_decode($matches[1], true);
+
+            // Verifica se o JSON foi decodificado com sucesso
+            if ($videoData !== null && isset($videoData['@type']) && $videoData['@type'] === 'VideoObject') {
+                // Extrai e formata as informações do vídeo conforme necessário
+                $name = $videoData['name'];
+                $duration = formatDuration($videoData['duration']);
+                $thumbnailUrl = $videoData['thumbnailUrl'];
+                $uploadDate = formatDate($videoData['uploadDate']);
+                $description = $videoData['description'];
+                $author = $videoData['author'];
+
+                // Extrai as interações do vídeo
+                $watchCount = $videoData['interactionStatistic'][0]['userInteractionCount'];
+                $likeCount = $videoData['interactionStatistic'][1]['userInteractionCount'];
+
+                // Exibe as informações do vídeo
+                // echo '<p><strong>Título:</strong> ' . $name . '</p>';
+                // echo '<p><strong>Duração:</strong> ' . $duration . '</p>';
+                // echo '<p><strong>Thumbnail:</strong> <img src="' . $thumbnailUrl . '" alt="Thumbnail do Vídeo"></p>';
+                // echo '<p><strong>Data de Publicação:</strong> ' . $uploadDate . '</p>';
+                // echo '<p><strong>Descrição:</strong> ' . $description . '</p>';
+                // echo '<p><strong>Autor:</strong> ' . $author . '</p>';
+                // echo '<p><strong>Visualizações:</strong> ' . $watchCount . '</p>';
+                // echo '<p><strong>Curtidas:</strong> ' . $likeCount . '</p>';
+            } else {
+                echo 'Não foi possível encontrar informações válidas do vídeo.';
+            }
+        } else {
+            echo '<!--Não foi possível encontrar o script JSON-LD na página.-->';
+        }
+
+        // Função para formatar a duração do vídeo
+        function formatDuration($duration) {
+            $interval = new DateInterval($duration);
+            return $interval->format('%h horas %i minutos');
+        }
+
+        // Função para formatar a data de publicação
+        function formatDate($uploadDate) {
+            $date = new DateTime($uploadDate);
+            $date->setTimezone(new DateTimeZone('America/Sao_Paulo'));
+            return $date->format('d/m/Y H:i');
+        }
+        ?>
+<!--
+><(((('>
+╔═╗╔═╗╔═╗╔╗╔ ╔╦╗╔═╗
+║ ╦║╣ ╠═╣║║║ ║║║║╣ 
+╚═╝╚═╝╩ ╩╝╚╝o╩ ╩╚═╝
+-->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image:src" content="<?php echo $thumbnailUrl; ?>">
+  <meta property="og:image" content="<?php echo $thumbnailUrl; ?>">
+  <meta name="twitter:title" content="<?php echo $name; ?>">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="https://feedburner.google.com/fb/images/favicon.ico" type="image/x-icon">
+  <meta name="description" content="<?php echo $description; ?>">
+  
+  
+  <title>U1M Hub - <?php echo $name; ?></title>
+  <link rel="alternate" type="application/rss+xml" title="U1M Hub - Feed" href="https://feeds.feedburner.com/u1mhub">
+  <link rel="stylesheet" href="https://gean.me/receita/assets/web/assets/mobirise-icons2/mobirise2.css">
+  <link rel="stylesheet" href="https://geanramos.com/cdn/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://geanramos.com/cdn/assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="https://geanramos.com/cdn/assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="https://geanramos.com/cdn/assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="https://gean.me/receita/assets/socicon/css/styles.css">
+  <link rel="stylesheet" href="https://geanramos.com/cdn/assets/theme/css/style.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"></noscript>
+  <link rel="preload" as="style" href="https://geanramos.com/cdn/assets/mobirise/css/mbr-additional.css?v=ING7Nt"><link rel="stylesheet" href="https://geanramos.com/cdn/assets/mobirise/css/mbr-additional.css?v=ING7Nt" type="text/css">
+<style>
+    /* Estilos gerais */
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .cid-u9p4T2OFvK img,
+    .cid-u9p4T2OFvK .item-img,
+    div.image-wrapper img {
+        width: 100%;
+        border-radius: 8px;
+    }
+
+    iframe, div.item-img {
+        border-radius: 8px;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Efeito hover na imagem */
+    .item-img img {
+        transition: transform 0.3s ease;
+    }
+
+    .item-img:hover img {
+        transform: scale(1.1); /* Aumenta a escala da imagem em 10% ao passar o mouse */
+    }
+
+    /* Estilos para o container */
+    .item-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Estilos para o conteúdo dentro do container */
+    .item-content {
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    /* Estilos para os links */
+    .item-content a {
+        color: #007bff; /* Cor do link */
+        text-decoration: none; /* Remove sublinhado padrão */
+    }
+
+    /* Efeito hover no link */
+    .item-content a:hover {
+        text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+    }
+
+    /* Estilos para botões secundários */
+    .btn-secondary,
+    .btn-secondary:active {
+        background-color: #009d43 !important;
+        border-color: #009d43 !important;
+        color: #ffffff !important;
+    }
+
+    /* Estilos para textos primários */
+    .text-primary {
+        color: #000000 !important;
+    }
+    .mini {
+    text-transform: lowercase;
+}
+.cid-u9pQbjaghj img, .cid-u9pQbjaghj .item-img {
+    width: 100%;
+    filter: brightness(0.75);
+}
+</style>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://gean.me/ph-home.php",
+    "@type": "WebPage",
+    "url": "https://gean.me/ph-watch?v=<?php echo $videoId; ?>",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://gean.me/search?q={query}",
+      "query": "required"
+    }
+  }
+</script>
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org/",
+    "@type": "VideoObject",
+    "name": "<?php echo $name; ?>",
+    "duration": "<?php echo $duration; ?>",
+    "thumbnailUrl": "<?php echo $thumbnailUrl; ?>",
+    "uploadDate": "<?php echo $uploadDate; ?>",
+    "description": "Assista <?php echo $name; ?> na U1M Hub, o melhor site adulto. A U1M Hub é o lar da maior e melhor coleção de Porno do Brasil e do mundo.",
+    "author": "<?php echo $author; ?>",
+    "interactionStatistic": [
+      {
+        "@type": "InteractionCounter",
+        "interactionType": "http://schema.org/WatchAction",
+        "userInteractionCount": "<?php echo $watchCount; ?>"
+      },
+      {
+        "@type": "InteractionCounter",
+        "interactionType": "http://schema.org/LikeAction",
+        "userInteractionCount": "<?php echo $likeCount; ?>"
+      }
+    ]
+  }
+</script>
+<script type="application/ld+json" class="yoast-schema-graph">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://gean.me/ph-watch?v=<?php echo $videoId; ?>",
+        "url": "https://gean.me/ph-watch?v=<?php echo $videoId; ?>",
+        "name": "<?php echo $name; ?>",
+        "isPartOf": { "@id": "https://gean.me/ph-home.php#website" },
+        "primaryImageOfPage": { "@id": "https://gean.me/ph-watch?v=<?php echo $videoId; ?>#primaryimage" },
+        "image": { "@id": "https://gean.me/ph-watch?v=<?php echo $videoId; ?>#primaryimage" },
+        "thumbnailUrl": "<?php echo $thumbnailUrl; ?>",
+        "datePublished": "<?php echo $uploadDate; ?>",
+        "description": "Assista <?php echo $name; ?> na U1M Hub, o melhor site adulto. A U1M Hub é o lar da maior e melhor coleção de Porno do Brasil e do mundo.",
+        "breadcrumb": { "@id": "https://gean.me/ph-watch?v=<?php echo $videoId; ?>#breadcrumb" },
+        "inLanguage": "pt-BR",
+        "potentialAction": [{ "@type": "ReadAction", "target": ["https://gean.me/ph-watch?v=<?php echo $videoId; ?>"] }]
+      },
+      {
+        "@type": "ImageObject",
+        "inLanguage": "pt-BR",
+        "@id": "https://gean.me/ph-watch?v=<?php echo $videoId; ?>#primaryimage",
+        "url": "<?php echo $thumbnailUrl; ?>",
+        "contentUrl": "<?php echo $thumbnailUrl; ?>",
+        "width": 640,
+        "height": 360,
+        "caption": "<?php echo $name; ?>"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://gean.me/ph-watch?v=<?php echo $videoId; ?>#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://gean.me/ph-home.php" },
+          { "@type": "ListItem", "position": 2, "name": "Vídeos", "item": "https://gean.me/ph-watch.php" },
+          { "@type": "ListItem", "position": 3, "name": "<?php echo $name; ?>" }
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://gean.me/ph-home.php#website",
+        "url": "https://gean.me/ph-home.php",
+        "name": "U1M Hub",
+        "description": "",
+        "publisher": { "@id": "https://gean.me/ph-home.php#organization" },
+        "potentialAction": [{ "@type": "SearchAction", "target": { "@type": "EntryPoint", "urlTemplate": "https://gean.me/search?q={search_term_string}" }, "query-input": "required name=search_term_string" }],
+        "inLanguage": "pt-BR"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://gean.me/ph-home.php#organization",
+        "name": "U1M Hub",
+        "url": "https://gean.me/ph-home.php",
+        "logo": {
+          "@type": "ImageObject",
+          "inLanguage": "pt-BR",
+          "@id": "https://gean.me/ph-home.php#/schema/logo/image/",
+          "url": "https://i1.wp.com/cdn.jsdelivr.net/gh/geanramos/files/logo/7.png",
+          "contentUrl": "https://i1.wp.com/cdn.jsdelivr.net/gh/geanramos/files/logo/7.png",
+          "width": 500,
+          "height": 500,
+          "caption": "U1M Hub"
+        },
+        "image": { "@id": "https://gean.me/ph-home.php#/schema/logo/image/" },
+        "sameAs": ["https://www.facebook.com/geanramoss"]
+      }
+    ]
+  }
+</script>
+</head>
+<body>
+  
+  <section data-bs-version="5.1" class="menu menu2 cid-u9pQbhNXYj" once="menu" id="menu2-k">
+    
+    <nav class="navbar navbar-dropdown navbar-expand-lg">
+        <div class="container">
+            <div class="navbar-brand">
+                <span class="navbar-logo">
+                    <a href="./ph-home.php">
+                        <img src="https://cdn.jsdelivr.net/gh/geanramos/files/u2mhub.svg" alt="U1M Hub" style="height: 2rem;">
+                    </a>
+                </span>
+                
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="./ph-home.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="#features4-n">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="https://www.google.com/search?q=receita+site:gean.me" target="_blank">Receitas</a>
+                    </li></ul>
+                <div class="icons-menu">
+                    <a class="iconfont-wrapper" href="#" target="_blank">
+                        <span class="p-2 mbr-iconfont socicon-facebook socicon"></span>
+                    </a>
+                    <a class="iconfont-wrapper" href="#" target="_blank">
+                        <span class="p-2 mbr-iconfont socicon-twitter socicon"></span>
+                    </a>
+                    <a class="iconfont-wrapper" href="#" target="_blank">
+                        <span class="p-2 mbr-iconfont socicon-instagram socicon"></span>
+                    </a>
+                    
+                </div>
+                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-4" href="#form4-6"><span class="mobi-mbri mobi-mbri-share mbr-iconfont mbr-iconfont-btn"></span>E-books Premium</a></div>
+            </div>
+        </div>
+    </nav>
+</section>
+
+<section data-bs-version="5.1" class="video5 cid-u9pRtVKEQS" id="video5-q">
+    <div class="container">
+        <div class="title-wrapper mb-5">            
+        </div>
+        <div class="row align-items-center">
+		<?php
+        // Verifica se o parâmetro ?v= foi passado na URL
+        if (isset($_GET['v']) && !empty($_GET['v'])) {
+            // Obtém o ID do vídeo da URL
+            $videoId = $_GET['v'];
+
+            // Monta a URL de incorporação do vídeo do YouTube
+            $embedUrl = "https://pt.pornhub.com/embed/$videoId";
+
+            // Exibe o vídeo usando um iframe
+            echo '<div class="col-12 col-lg-6 video-block">';
+            echo '<div class="video-wrapper"><iframe class="mbr-embedded-video" src="' . $embedUrl . '" width="560" height="315" frameborder="0" allowfullscreen></iframe></div>';
+            echo '<p class="mbr-description pt-2 mbr-fonts-style display-4">' . $author . ' - ' . $watchCount . ' views</p>';
+			echo '</div>';
+        } else {
+            // Se o parâmetro ?v= não foi fornecido, exibe uma mensagem de erro
+            echo '<div class="col-12 col-lg-6 video-block">';
+            echo '<div class="video-wrapper"><iframe class="mbr-embedded-video" src="https://www.youtube.com/embed/LMD6MqwErzc?rel=0&mute=1&showinfo=0&autoplay=1&loop=0" width="560" height="315" frameborder="0" allowfullscreen></iframe></div>';
+            echo '<p class="mbr-description pt-2 mbr-fonts-style display-4">U1M Hub</p>';
+			echo '</div>';
+        }
+        ?>
+            <div class="col-12 col-lg">
+                <div class="text-wrapper">
+                    <h6 class="card-title mbr-fonts-style display-2 mini"><strong>
+                        <strong><?php echo $name; ?></strong></h6>
+                    <p class="mbr-text mbr-fonts-style display-7"><?php echo $name; ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="features4 cid-u9pQbjaghj" id="features4-n">
+    
+    
+    <div class="container">
+        <div class="mbr-section-head">
+            <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2"><strong>U1M Hub</strong></h4>
+            <h5 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 mt-2 display-5">Delicie-se com vídeos novos a cada 30 minutos</h5>
+        </div>
+        <div class="row mt-4">
+		  <!-- INICIO VIDEOS RELACIONADOS 3:2 -->
+<?php
+// URL do arquivo JSON
+$json_url = 'https://gean.me/ph-webmasterss.json';
+
+// Obter o conteúdo do arquivo JSON
+$json_data = file_get_contents($json_url);
+
+// Decodificar o conteúdo JSON em um array associativo
+$data = json_decode($json_data, true);
+
+// Verificar se o JSON foi decodificado corretamente
+if ($data === null) {
+    die('Erro ao decodificar o JSON.');
+}
+
+// Inicializar um contador para controlar o número de ocorrências
+$count = 0;
+
+// Iterar sobre os dados para extrair as informações das 4 primeiras ocorrências
+foreach ($data as $video) {
+    if ($count >= 4) {
+        break; // Parar após as 4 primeiras ocorrências
+    }
+
+    // Extrair as informações de cada vídeo
+    $ph_title = $video['ph_title'];
+    $ph_id = $video['ph_id'];
+    $ph_thumb = $video['ph_thumb'];
+    $ph_keywords = $video['ph_keywords'];
+    $ph_date = $video['ph_date'];
+    $ph_time = $video['ph_time'];
+
+    // Exibir as informações
+    // echo "Título: $ph_title<br>";
+    // echo "ID: $ph_id<br>";
+    // echo "Thumbnail: <img src=\"$ph_thumb\"><br>";
+    // echo "Palavras-chave: $ph_keywords<br>";
+    // echo "Data: $ph_date<br>";
+    // echo "Tempo: $ph_time minutos<br><br>";
+
+    echo "<div class=\"item features-image сol-12 col-md-6 col-lg-3\">";
+    echo "<div class=\"item-wrapper\">";
+    echo "<div class=\"item-img\"><a href=\"./ph-watch?v=$ph_id\"><img src=\"$ph_thumb?resize=360,540\" alt=\"$ph_title\" title=\"$ph_title\" /></a></div>";
+    echo "<div class=\"item-content\"><h6 class=\"item-subtitle mbr-fonts-style mt-1 display-7\">$ph_time minutos</h6>";
+    echo "<p class=\"mbr-text mbr-fonts-style mt-3 display-7\"><a href=\"./ph-watch?v=$ph_id\" class=\"text-primary\">$ph_title</a></p>";
+    echo "</div></div></div>";
+    // Incrementar o contador
+    $count++;
+}
+?>
+
+		  <!-- FIM VIDEOS RELACIONADOS 3:2 -->
+          <!-- INICIO VIDEOS RELACIONADOS 16:9 -->
+<?php
+// URL da página que contém os dados
+$url = "https://pt.pornhub.com/embed/$videoId";
+// Obter o conteúdo da página
+$html = file_get_contents($url);
+// Inicializar a variável para armazenar o video_id
+$video_id = '';
+// Expressão regular para extrair o video_id
+$pattern = '/"video_id":\s*(\d+)/';
+// Procurar o padrão na página HTML
+if (preg_match($pattern, $html, $matches)) {
+    // Extrair o video_id do primeiro grupo de captura
+    $video_id = $matches[1];
+}
+// URL da página que contém os dados JSON
+$url2 = "https://pt.pornhub.com/video/player_related_datas?id=$video_id";
+// Obtém o conteúdo JSON da URL
+$json = file_get_contents($url2);
+// Decodifica o JSON para um array associativo
+$data = json_decode($json, true);
+if ($data && isset($data['mostViewed'])) {
+    // Obter as informações da "mostViewed" do JSON
+    $mostViewed = $data['mostViewed'];
+    // Exibir até 16 primeiras ocorrências
+    $numResults = min(16, count($mostViewed));
+    for ($i = 0; $i < $numResults; $i++) {
+        $item = $mostViewed[$i];
+        // Altera as URLs conforme especificado
+        $imgUrl = str_replace('https://ei.phncdn.com/videos/', 'https://i2.wp.com/ei.phncdn.com/videos/', $item[0]);
+        $videoUrl = str_replace('https://pt.pornhub.com/view_video.php?viewkey=', 'https://gean.me/ph-watch?v=', $item[4]);
+        // Exibe os dados
+        //echo "<div>";
+        //echo "<img src='$imgUrl?resize=160,90' alt='Imagem do Vídeo'>";
+        //echo "<p><strong>Título:</strong> {$item[1]}</p>";
+        //echo "<p><strong>Duração:</strong> {$item[2]}</p>";
+        //echo "<p><strong>URL do Vídeo:</strong> <a href='$videoUrl'>$videoUrl</a></p>";
+        //echo "<p><strong>Autor:</strong> @{$item[7]}</p>";
+        //echo "</div>";
+        //echo "<hr>";
+		
+        echo "<div class=\"item features-image сol-12 col-md-6 col-lg-3\">";
+		echo "<div class=\"item-wrapper\">";
+		echo "<div class=\"item-img\"><a href=\"$videoUrl\"><img src=\"$imgUrl?resize=160,90\" alt=\"{$item[1]}\" title=\"{$item[1]}\" /></a></div>";
+		echo "<div class=\"item-content\"><h6 class=\"item-subtitle mbr-fonts-style mt-1 display-7\">{$item[2]} minutos</h6>";
+		echo "<p class=\"mbr-text mbr-fonts-style mt-3 display-7\"><a href=\"$videoUrl\" class=\"text-primary\">{$item[1]}</a></p>";
+		echo "</div></div></div>";
+    }
+} else {
+    echo "<p>Vídeos Relacionados inexistente</p>";
+}
+?>
+          <!-- FIM VIDEOS RELACIONADOS 16:9 -->
+            <!--<div class="item features-image сol-12 col-md-6 col-lg-3">
+                <div class="item-wrapper">
+                    <div class="item-img">
+                        <a href="#top"><img src="https://geanramos.com/cdn/assets/images/team3.jpeg" alt="TITULO DA IMG" title=""></a>
+                    </div>
+                    <div class="item-content">
+                        <h5 class="item-title mbr-fonts-style display-5"><strong>Design</strong></h5>
+                        <h6 class="item-subtitle mbr-fonts-style mt-1 display-7">Website Design</h6>
+                        <p class="mbr-text mbr-fonts-style mt-3 display-7"><a href="#top" class="text-primary">You don't have to code to create your own site. Select one of available themes in the Mobirise Site Maker.</a></p>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="item features-image сol-12 col-md-6 col-lg-3">
+                <div class="item-wrapper">
+                    <div class="item-img">
+                        <a href="#top"><img src="https://geanramos.com/cdn/assets/images/background13-1.jpeg" alt="TITULO DA IMG" title=""></a>
+                    </div>
+                    <div class="item-content">
+                        <h5 class="item-title mbr-fonts-style display-5"><strong>Code</strong></h5>
+                        <h6 class="item-subtitle mbr-fonts-style mt-1 display-7">
+                            HTML/CSS Coding</h6>
+                        <p class="mbr-text mbr-fonts-style mt-3 display-7"><a href="page1.html#features4-d" class="text-primary">You don't have to code to create your own
+                            site. Select one of available themes in the Mobirise Site Maker.</a></p>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="item features-image сol-12 col-md-6 col-lg-3">
+                <div class="item-wrapper">
+                    <div class="item-img">
+                        <a href="#top"><img src="https://geanramos.com/cdn/assets/images/mbr-4.jpeg" alt="TITULO DA IMG" title=""></a>
+                    </div>
+                    <div class="item-content">
+                        <h5 class="item-title mbr-fonts-style display-5"><strong>Branding</strong></h5>
+                        <h6 class="item-subtitle mbr-fonts-style mt-1 display-7">Creating</h6>
+                        <p class="mbr-text mbr-fonts-style mt-3 display-7">You don't have to code to create your own site. Select one of available themes in the Mobirise Site Maker.<br></p>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="item features-image сol-12 col-md-6 col-lg-3">
+                <div class="item-wrapper">
+                    <div class="item-img">
+                        <a href="#top"><img src="https://geanramos.com/cdn/assets/images/team4.jpeg" alt="TITULO DA IMG" title="" data-slide-to="3" data-bs-slide-to="4"></a>
+                    </div>
+                    <div class="item-content">
+                        <h5 class="item-title mbr-fonts-style display-5"><strong>Branding</strong></h5>
+                        <h6 class="item-subtitle mbr-fonts-style mt-1 display-7">Creating</h6>
+                        <p class="mbr-text mbr-fonts-style mt-3 display-7">You don't have to code to create your own site. Select one of available themes in the Mobirise Site Maker.<br></p>
+                    </div>
+                    
+                </div>
+            </div>-->
+
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="footer3 cid-u9pQbjSr6D" once="footers" id="footer3-o">
+
+    
+
+    
+
+    <div class="container">
+        <div class="media-container-row align-center mbr-white">
+            <div class="row row-links">
+                <ul class="foot-menu">
+                <li class="foot-menu-item mbr-fonts-style display-7">
+                <a class="text-white" href="./ph-home.php" target="_self">Sobre</a></li><li class="foot-menu-item mbr-fonts-style display-7">
+                <a class="text-white" href="./ph-home.php" target="_self">Receitas</a></li><li class="foot-menu-item mbr-fonts-style display-7">
+                <a class="text-white" href="https://www.google.com/search?q=receita+site:gean.me" target="_blank">Receitas</a></li></ul>
+            </div>
+            <div class="row social-row">
+                <div class="social-list align-right pb-2">
+                <div class="soc-item">
+                        <a href="https://twitter.com/" target="_blank">
+                            <span class="socicon-twitter socicon mbr-iconfont mbr-iconfont-social"></span>
+                        </a>
+                    </div><div class="soc-item">
+                        <a href="https://www.facebook.com/" target="_blank">
+                            <span class="socicon-facebook socicon mbr-iconfont mbr-iconfont-social"></span>
+                        </a>
+                    </div><div class="soc-item">
+                        <a href="https://www.youtube.com/" target="_blank">
+                            <span class="socicon-youtube socicon mbr-iconfont mbr-iconfont-social"></span>
+                        </a>
+                    </div></div>
+            </div>
+            <div class="row row-copirayt">
+                <p class="mbr-text mb-0 mbr-fonts-style mbr-white align-center display-7">© 2004 - 2024 U1M Hub.</p>
+            </div>
+        </div>
+    </div>
+</section><script src="https://geanramos.com/cdn/assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="https://geanramos.com/cdn/assets/smoothscroll/smooth-scroll.js"></script>  <script src="https://geanramos.com/cdn/assets/ytplayer/index.js"></script>  <script src="https://geanramos.com/cdn/assets/dropdown/js/navbar-dropdown.js"></script>  <script src="https://geanramos.com/cdn/assets/playervimeo/vimeo_player.js"></script>  <script src="https://geanramos.com/cdn/assets/theme/js/script.js"></script>  
+  
+  
+</body>
+</html>

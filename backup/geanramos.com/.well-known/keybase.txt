@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/geanramos
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://geanramos.com
+  * I am geanramos (https://keybase.io/geanramos) on keybase.
+  * I have a public key with fingerprint 5562 F836 1549 A25B 7DA3  C6CF 8616 F719 FFC1 052F
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "010147a605c8ec40e8c293a3c9d9700ce004c877b0efbaea9557325b79a93acae9c40a",
+      "fingerprint": "5562f8361549a25b7da3c6cf8616f719ffc1052f",
+      "host": "keybase.io",
+      "key_id": "8616f719ffc1052f",
+      "kid": "010147a605c8ec40e8c293a3c9d9700ce004c877b0efbaea9557325b79a93acae9c40a",
+      "uid": "b32a60767d97cc7c733f64358c0b7919",
+      "username": "geanramos"
+    },
+    "service": {
+      "hostname": "geanramos.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1608551212,
+  "expire_in": 157680000,
+  "prev": "e6a097e449af5b6baf13dc457a27f8e905e0787c22ac6821932e3cd11d878a21",
+  "seqno": 12,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.13
+Comment: https://keybase.io/crypto
+
+yMImAnicrZJ7SBRBHMfvemjalUdU0uM0F7sCj2Nn93Zn91IplQqiBxj90eucnZ31
+FnX3bne9OkSQCCr6Q4XEtJAILIiIkp5ikGJ/ZJQiFQVFER0VUfZEekDNSv0T/dn8
+M8zM5/uZ3/yY4TnTPbnesR2PhneE7mz23h7sbvTEnh0ONTGKqaaZaBNTR6YmUq8S
+24nV6SoTZVjAgghEIitgieAISyTMyTzisazKkGUxYdkIliBUWKIpiCBZECDPCQqU
+EcUwIjINISbEaLpRS6yEpRsO1QqCyGkSLwIhIiMXV6lSxJokAlGDQNY0DFiB02gw
+btpughanIJuEdZPu0UVsqrx/8P+57sYpncJz1AVFSNMYQwx5XhMjvCBhlkaA7II2
+sQzUQChdS5BhoQbTZppDDN1O6Zi4nXWf8jcSxmYDTScs0zGxWU+P4o6TsKNu1Ekn
+XHYPUWK/LTFFN1TaSZpIEcvWTYOJAkpiR3e1QGQlQQAc4EIM2ZvQLRLTXUKAosTS
+4d5DUlRJRMTKkERo9zVBERWkAV7FEQEiDmoSkVmBsFCCmOMQFiUOyDxHeKwCoEpQ
+Qhxg3HclDZO66VUOqqVOW681kNNoEaZ56MbOGR5vridr5jT3i3lyc/x/Pt6D29k/
+Zrf5WubGkzunPfxyf+XG3qfhxUXpNz6ebH7WNNK+XSi22tYw5yqbj7UOeef/5Kou
+R7+VXRqpXBDfW52/4DR6t6I3LzPUkbfuXvjl18DjTP+TfPy85MXr0usfa/Lb3131
+Fx1sbxm71RlYP9/MnOz5DgqvVoWrk5MbBtGiWfu7nU+vzhYfLR+f13Via2u0pOD8
+h4luZtOpoHfg+4Py4203dp3JCad61n4OHprwfWlYUnrFX3gEVGwcnX1hYt6WjvLV
+b77e7cuqf1z8o3Pf2+zcRTXflvaP+nr6qk8u7+gd7U8uq7jJbxtI36paVRbwTX6a
+DPqCCzf4RwrIgfGMal4LdL3fffEX5F4+NA==
+=hVeJ
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/geanramos
+
+==================================================================

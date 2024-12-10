@@ -1,0 +1,34 @@
+{
+  "kind": "youtube#videoListResponse",
+  "etag": "etag_value",
+  "items": [
+    {
+      "kind": "youtube#video",
+      "etag": "etag_value",
+      "id": "video_id",
+      "snippet": {
+        "publishedAt": "2023-11-14T15:59:59Z",
+        "channelId": "channel_id",
+        "title": "Título do Vídeo",
+        "description": "Descrição do Vídeo",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/video_id/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/video_id/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/video_id/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        }
+      }
+    }
+  ]
+}

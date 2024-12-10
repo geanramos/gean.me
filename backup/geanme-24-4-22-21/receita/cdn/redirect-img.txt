@@ -1,0 +1,13 @@
+https://www.receiteria.com.br/receita/bolo-de-banana-sem-gluten-e-lactose/
+https://gean.me/receita/bolo-de-banana-sem-gluten-e-lactose
+
+https://www.receiteria.com.br/wp-content/uploads/bolo-de-banana-sem-gluten-e-lactose-730x548.jpeg
+
+0 - https://i2.wp.com/gean.me/fnc/bolo-de-banana-sem-gluten-e-lactose.jpeg?resize=600,330
+1 - https://gean.me/fnc/bolo-de-banana-sem-gluten-e-lactose.jpeg?resize=600,330
+2 - https://i0.wp.com/receiteria.com.br/wp-content/uploads/bolo-de-banana-sem-gluten-e-lactose.jpeg?resize=600,330
+
+
+RewriteCond %{HTTP_HOST} ^gean.me/fnc/$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^www.gean.me/fnc/$
+RewriteRule ^(.*)$ https://i0.wp.com/receiteria.com.br/wp-content/uploads/$1 [L,R=301]

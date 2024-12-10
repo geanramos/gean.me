@@ -1,0 +1,82 @@
+==================================================================
+https://keybase.io/geanramos
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://gean.me
+  * I am geanramos (https://keybase.io/geanramos) on keybase.
+  * I have a public key with fingerprint 5562 F836 1549 A25B 7DA3  C6CF 8616 F719 FFC1 052F
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "010147a605c8ec40e8c293a3c9d9700ce004c877b0efbaea9557325b79a93acae9c40a",
+      "fingerprint": "5562f8361549a25b7da3c6cf8616f719ffc1052f",
+      "host": "keybase.io",
+      "key_id": "8616f719ffc1052f",
+      "kid": "010147a605c8ec40e8c293a3c9d9700ce004c877b0efbaea9557325b79a93acae9c40a",
+      "uid": "b32a60767d97cc7c733f64358c0b7919",
+      "username": "geanramos"
+    },
+    "merkle_root": {
+      "ctime": 1669082624,
+      "hash_meta": "48df0e87dd60b5a17e6d09a7a37c7a068d98a90188691d4f81fac7c71a280955",
+      "seqno": 23594663
+    },
+    "revoke": {
+      "sig_ids": [
+        "2ad6a636a9d6e739eb4e64b7e6ded0421d241eaba27740c5883268d4359e9e4a0f"
+      ]
+    },
+    "service": {
+      "hostname": "gean.me",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1669082641,
+  "expire_in": 157680000,
+  "prev": "0700f89650561f07ca3958e432da123cc8cf985355c04300294d20990837dae7",
+  "seqno": 27,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.13
+Comment: https://keybase.io/crypto
+
+yMKvAnicrVNbaBxVGN60TSWBauyLmBaRqaDUbTj3y1q3UeotjSjBWpbYDmfOnNkM
+u5nZzkxW1xhbb1iiVkhtpfgQKhX7YFWMYGotlm0fRA0tomCpqHkI9CXtkxdSUM8E
+hSI+Oi8zc/hu/3fOObtmZaG74/zwhbPDxblHOr5qp2MF/UzfjeOOF/stpzTu1Mzy
+y9R9k2ZuLfSdkgMggIQrBqgWRhNghEYSK6ylLzkA2gBAtODcAybwlFGSUo4R9bhU
+FqaVkZaknKIThFHVJI0kjDIrSylDgcAMUiJVDvetJNOBYJAFHMog0BBQFFjiSJzm
+DBvOU6npC2O7Zn/c5Xj/gf+fc48ty3kYWS3OuGVrzTXHOGAEU6GBpUCZA1OTRGrU
+WHTVqChRo3HqTBSdUZPU6sZN4jjL29VZmGMgYxIIxBCxE6p0xB01mbJUIvzAhuW+
+z4BHFeSG+UAqrrA1VYAJXwolARSCSeiTQMBA5XmgQgLYIWyQ1OyOYqeEMJWEMWwj
+JKYZ10zunoZVW1zqlIYdpHymGGZK+sxwLI1HDCNebmh8QBD0EYFGeQpxToCmQmBk
+7e3Q0khDFAicnRO5W9IM9bJ4vlPXNNBnv4pOI4mzWMd1uziSZY20lHeStRo56knj
+uX/zXS+MfHtELKNpkjSMI9uRRf6rLgKLjnmqESbGDXME5UwA++Q+ppnvu93cQEhG
+AWUwAFwrLKkwBCNfQYS1FjqQgmJKNSAYACSJj4C04tieQcOv6Y/bnKpqNW1pkcrG
+EuNMtE8/sarQ0V1Y3bkivzuF7q6ef27Ub+9d98dd6072/1S+7YOtN52afqu+feHM
+/M/R189Xwt75+95489nN4TRpzj+0YeWJq99/+vLGgckT4f6ZuaXe2aOXZtxNj16c
+quxbHFxTOfTN5cmR8Yl3h+7uOlrZ+8rxy1NLd+6/47NTW+Za7s6Te+rfbR7oeZ/0
+B514y67VtfINT7/W1e5+YQf7853pDbXqw2Nbnwu/6Pty1ye16IFBZ+HextKR/oXf
+ByZnDq4fhGemHl98afvw3pmPb63pPYdbQxvf/nUV+OUxMHhl8dyBj15c0TMfj58u
+tw5fhJ1XrvfQ69vOHzpwqTLbf6H87YP37J4ttn9ce8v6+w+uK2z68FzvjvLt9Swa
+2nbzD69+fnVf+9ixvwBllnoE
+=cU43
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/geanramos
+
+==================================================================
+

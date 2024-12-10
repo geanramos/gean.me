@@ -1,0 +1,3 @@
+Options +FollowSymLinks
+RewriteEngine on
+RewriteRule (.*) http://geanramos.com/youtu?be=$1 [R=301,L]

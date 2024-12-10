@@ -1,0 +1,50 @@
+.link-html{
+    min-height:100%
+}
+.link-body{
+    background-size:cover!important;
+    background-position:center center!important;
+    background-repeat:no-repeat!important;
+    min-height:100%
+}
+.link-content{
+    padding-top:2rem
+}
+.link-image{
+    width:125px;
+    height:125px;
+    border-radius:50%;
+    margin-bottom:1rem
+}
+.link-verified{
+    color:#3897f0
+}
+.link-btn{
+    white-space:normal;
+    word-wrap:break-word;
+    padding:1rem;
+    font-size:1.1rem;
+    box-shadow:0 0 20px #00000010;
+    border:0;
+    transition:opacity .3s,background .3s;
+    border-radius:0
+}
+.link-btn:hover{
+    animation:none
+}
+.link-btn-round{
+    border-radius:.3rem
+}
+.link-btn-rounded{
+    border-radius:50px
+}
+.link-iframe-round{
+    border-radius:.3rem;
+    overflow:hidden;
+    position:relative
+}
+.link-footer{
+    margin-top:3rem;
+    font-size:.9rem
+}
+

@@ -1,0 +1,68 @@
+<!--
+><(((('>
+╔═╗╔═╗╔═╗╔╗╔ ╔╦╗╔═╗
+║ ╦║╣ ╠═╣║║║ ║║║║╣ 
+╚═╝╚═╝╩ ╩╝╚╝o╩ ╩╚═╝
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Video Player plyr.js</title>
+<link rel="stylesheet" href="https://unpkg.com/plyr@3.7.8/dist/plyr.css" />
+<script src="https://unpkg.com/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
+<script src="https://unpkg.com/plyr@3.7.8/src/js/plugins/youtube.js"></script>
+<script src="https://unpkg.com/plyr@3.7.8/src/js/fullscreen.js"></script>
+<link rel="icon" href="https://cdn.plyr.io/static/icons/favicon.ico" />
+<style>
+/* Estilo para o contêiner */
+html {
+    overflow: hidden;
+}
+body {
+    font: 12px Roboto, Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Altura igual à altura da janela visível */
+    overflow: hidden; /* Oculta o conteúdo fora do contêiner */
+    display: flex;
+    background-color: #000; /* Cor de fundo preta */
+}
+
+/* Estilo para o vídeo dentro do contêiner */
+.container video {
+    width: 100%; /* Ocupa toda a largura do contêiner */
+    height: auto; /* Altura ajustada automaticamente */
+}
+
+/* Estilo para o pôster do vídeo (imagem de pré-visualização) */
+.container video::poster {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Cobrir todo o espaço do vídeo */
+    justify-content: center; /* Centraliza o vídeo horizontalmente */
+    align-items: center; /* Centraliza o vídeo verticalmente */
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<video id="player" playsinline controls poster="https://cdn.jsdelivr.net/gh/sampotts/plyr@master/demo/media/View_From_A_Blue_Moon_Trailer-HD.jpg">
+  <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" type="video/mp4" />
+</video>
+
+</div>
+
+</body>
+</html>

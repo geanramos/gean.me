@@ -1,0 +1,1 @@
+RewriteRule ^(.*)$ https://i1.wp.com/www.receiteria.com.br/wp-content/uploads/$1 [L,R=301]

@@ -1,0 +1,82 @@
+# BEGIN YOURLS
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]
+RewriteRule ^ /%1 [NC,L,R]
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^ %{REQUEST_URI}.php [NC,L]
+RewriteRule ^([A-Za-z0-9_-]+)/$ ?url=$1 [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ /yourls-loader.php [L]
+</IfModule>
+# END YOURLS
+
+
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^receitas/(.*)/$ /receitas/?url=$1 [L]
+RewriteRule ^receitas/([A-Za-z0-9_-]+)/$ receitas/?url=$1 [L]
+</IfModule>
+
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^receita/(.*)/$ /receita/?url=$1 [L]
+RewriteRule ^receita/([A-Za-z0-9_-]+)/$ receita/?url=$1 [L]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^channel/(.*)$ /channel/?c=$1 [L]
+RewriteRule ^channel/([A-Za-z0-9_-]+)$ channel/?c=$1 [L]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^shorts/(.*)$ /shorts/?v=$1 [L]
+RewriteRule ^shorts/([A-Za-z0-9_-]+)/$ shorts/?v=$1 [L]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^embed/(.*)$ /embed/?v=$1 [L]
+RewriteRule ^embed/([A-Za-z0-9_-]+)/$ embed/?v=$1 [L]
+</IfModule>
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{QUERY_STRING} ^url=www.receiteria.com.br/wp-content/uploads/(.*\.jpg)$ [NC]
+RewriteRule ^(.*)$ https://images.weserv.nl/uploads/%1? [R=301,L]
+
+ErrorDocument 400 https://gean.me/404.html?erro=400
+ErrorDocument 401 https://gean.me/404.html?erro=401
+ErrorDocument 403 https://gean.me/404.html?erro=403
+ErrorDocument 404 https://gean.me/404.html?erro=404
+ErrorDocument 500 https://gean.me/404.html?erro=500
+ErrorDocument 503 https://gean.me/404.html?erro=503
+
+# Para você retirar o “.php” da sua URL, basta inserir as seguintes linhas.
+# php
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType text/css "access plus 12 month"
+    ExpiresByType text/javascript "access plus 12 month"
+</IfModule>
